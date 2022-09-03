@@ -13,21 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
 
-    public function images()
+    public function category()
     {
-        return $this->hasMany (Image::class);
+        return $this->belongsTo(Category::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     /**
      * Reverse the migrations.
      *
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('images');
     }
 };
